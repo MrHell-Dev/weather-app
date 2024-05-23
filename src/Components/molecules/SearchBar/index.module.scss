@@ -1,0 +1,11 @@
+@import '../../../styles/partials/variable.scss';
+.searchBarWrapper {
+    width: clamp(6.25rem, 60vw, 40rem);
+    input {
+        background-color: $section-bg;
+        border-radius: 10px;
+        padding: 1rem 0.5rem;
+        border: none;
+        width: 100%;
+    }
+}

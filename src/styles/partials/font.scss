@@ -1,0 +1,6 @@
+@import './mixin.scss';
+
+$font-path: '/assets/fonts/';
+@include font-face(Roboto, '#{$font-path}Roboto', normal, normal);
+@include font-face(Roboto-Medium, '#{$font-path}Roboto-Medium', normal, normal);
+@include font-face(Roboto-Bold, '#{$font-path}Roboto-Bold', normal, normal);

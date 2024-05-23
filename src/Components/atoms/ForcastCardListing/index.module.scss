@@ -1,0 +1,25 @@
+@import '../../../styles/partials/variable.scss';
+
+.cityTodayForcast {
+    margin-top: 1.5rem;
+    & > p {
+        color: $inactive;
+        font-size: 0.8rem;
+    }
+    .ListWrapper {
+        overflow: auto;
+        padding: 1.5rem 0;
+        display: flex;
+        scrollbar-width: none;
+        flex-wrap: nowrap;
+        .item {
+            padding: 0 1.5rem;
+            border-right: solid 0.0625rem $disabled;
+            &:last-child {
+                border: none;
+            }
+        }
+    }
+    border-bottom: solid 0.0625rem $disabled;
+    border-radius: 0;
+}

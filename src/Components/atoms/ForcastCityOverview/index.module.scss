@@ -1,0 +1,14 @@
+@import '../../../styles/partials/variable.scss';
+.cityOverview {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 1.5rem;
+    border-bottom: solid 1px $disabled;
+    border-radius: 0;
+    .details {
+        p {
+            font-size: 0.625rem;
+        }
+        margin-bottom: 1.5rem;
+    }
+}

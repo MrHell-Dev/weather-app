@@ -1,0 +1,35 @@
+@import './partials/font';
+@import './partials/variable';
+@import '~bootstrap/scss/bootstrap.scss';
+%spacing-remove {
+    padding: 0;
+    margin: 0;
+}
+h3,
+h4,
+p {
+    @extend %spacing-remove;
+}
+ul,
+li {
+    @extend %spacing-remove;
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: $black;
+}
+
+.disabledWrapper {
+    opacity: 0.5;
+    background-color: $disabled;
+}
+
+.tempatureLabel {
+    position: relative;
+    &::after {
+        content: '°';
+        top: 0;
+        position: absolute;
+    }
+}

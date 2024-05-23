@@ -1,0 +1,47 @@
+@import '../../../styles/partials/variable.scss';
+.listingWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    column-gap: 2rem;
+
+    .List {
+        width: 75%;
+        ul {
+            li {
+                padding: 1.5rem;
+                border: none;
+                border-radius: 0.625rem;
+                display: flex;
+                align-items: center;
+                background-color: $section-bg;
+                margin-bottom: 1rem;
+                cursor: pointer;
+                justify-content: space-between;
+                div {
+                    padding: 0 1rem;
+                    &.iconTimeName {
+                        .nameTime {
+                            p {
+                                font-size: 0.8rem;
+                                color: $inactive;
+                            }
+                        }
+                    }
+                    &.temp {
+                        position: relative;
+                        font-size: 1.115rem;
+                    }
+                }
+
+                &.active {
+                    background-color: transparent;
+                    border: 1px solid $active;
+                }
+            }
+        }
+    }
+    .cityOverViewSection {
+        width: 50%;
+    }
+}

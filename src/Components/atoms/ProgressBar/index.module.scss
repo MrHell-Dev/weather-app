@@ -1,0 +1,8 @@
+@import '../../../styles/partials/variable.scss';
+.progressBar {
+    position: fixed;
+    width: 100%;
+    height: 100;
+    opacity: 0.5%;
+    background-color: $disabled;
+}
