@@ -21,11 +21,19 @@
                 div {
                     padding: 0 1rem;
                     &.iconTimeName {
+                        display: flex;
+                        align-items: center;
                         .nameTime {
+                            flex-direction: column;
                             p {
                                 font-size: 0.8rem;
                                 color: $inactive;
                             }
+                        }
+                        .icon {
+                            position: relative;
+                            width: 100px;
+                            height: 100px;
                         }
                     }
                     &.temp {
