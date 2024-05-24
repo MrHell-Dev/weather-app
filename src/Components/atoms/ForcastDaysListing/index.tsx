@@ -1,3 +1,5 @@
+import WeatherImage from '@/src/Components/atoms/WeatherImage';
+import { WeatherLabelBasedOnCode } from '@/src/Libs/Contants/Constant';
 import { classNameMerger } from '@/src/Libs/Utils/Common';
 import { dateFormat, dateParse } from '@/src/Libs/Utils/dayUtils';
 import { Col, Row } from 'react-bootstrap';
@@ -9,6 +11,7 @@ interface IForcastDaysListing {
         date: string;
         temp_max: number;
         temp_min: number;
+        code: number;
     }[];
 }
 function ForcastDaysListing(props: IForcastDaysListing) {
@@ -36,10 +39,11 @@ function ForcastDaysListing(props: IForcastDaysListing) {
                                       })}
                             </p>
                         </Col>
-                        <Col lg={3}>
-                            <p>
-                                <span>Icon</span>Sunny
-                            </p>
+                        <Col className={styles.weatherIconContainer} lg={3}>
+                            <div className="position-relative">
+                                <WeatherImage weatherCode={item?.code} />
+                            </div>
+                            <p>{WeatherLabelBasedOnCode[item?.code]}</p>
                         </Col>
                         <Col lg={3}>
                             <p>

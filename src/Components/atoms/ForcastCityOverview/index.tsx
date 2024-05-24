@@ -1,13 +1,14 @@
-import React from 'react';
+import WeatherImage from '@/src/Components/atoms/WeatherImage';
 import styles from './index.module.scss';
 
 interface IForcastCityOverView {
     name?: string;
     temp?: string;
+    weatherCode?: any;
 }
 
 function ForcastCityOverview(props: IForcastCityOverView) {
-    const { name, temp } = props;
+    const { name, temp, weatherCode } = props;
     return (
         <div className={styles.cityOverview}>
             <div>
@@ -16,7 +17,9 @@ function ForcastCityOverview(props: IForcastCityOverView) {
                 </div>
                 <h3 className="tempatureLabel">{temp}</h3>
             </div>
-            <div>Icon</div>
+            <div className={styles.iconWrapper}>
+                <WeatherImage weatherCode={weatherCode} />
+            </div>
         </div>
     );
 }

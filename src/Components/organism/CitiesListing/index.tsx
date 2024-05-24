@@ -168,6 +168,9 @@ function CitiesListing() {
                 <ForcastCityOverview
                     name={selectedCity?.name}
                     temp={selectedCity?.weatherData?.current?.temperature_2m}
+                    weatherCode={
+                        selectedCity?.weatherData?.current?.weather_code
+                    }
                 />
                 <ForcastCardListing
                     todaysForecastingData={forecastTodaysData}
