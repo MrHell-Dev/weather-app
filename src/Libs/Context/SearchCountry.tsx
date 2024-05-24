@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useState } from 'react';
+import { createContext, useMemo, useState } from 'react';
 
 interface SearchCountry {
     long: string;
@@ -9,10 +9,10 @@ interface SearchCountry {
 }
 export const SearchCountryContext = createContext<{
     searchCountry: SearchCountry | undefined;
-    setSelectedCountry: (a: SearchCountry) => void;
+    setSearchCountry: (a: SearchCountry) => void;
 }>({
     searchCountry: undefined,
-    setSelectedCountry: () => null,
+    setSearchCountry: () => null,
 });
 
 export const SearchCountryProvider = ({
@@ -20,11 +20,12 @@ export const SearchCountryProvider = ({
 }: {
     children: React.ReactNode;
 }) => {
-    const [searchCountry, setSelectedCountry] = useState<SearchCountry>();
+    const [searchCountry, setSearchCountry] = useState<SearchCountry>();
+    const valueToPass = useMemo(() => {
+        return { searchCountry, setSearchCountry };
+    }, [searchCountry]);
     return (
-        <SearchCountryContext.Provider
-            value={{ searchCountry, setSelectedCountry }}
-        >
+        <SearchCountryContext.Provider value={valueToPass}>
             {children}
         </SearchCountryContext.Provider>
     );

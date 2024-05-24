@@ -3,10 +3,12 @@ import ForcastCardListing from '@/src/Components/atoms/ForcastCardListing';
 import ForcastCityOverview from '@/src/Components/atoms/ForcastCityOverview';
 import ForcastDaysListing from '@/src/Components/atoms/ForcastDaysListing';
 import ProgressBar from '@/src/Components/atoms/ProgressBar';
+import WeatherImage from '@/src/Components/atoms/WeatherImage';
 import dataJson from '@/src/Data/CityList.json';
 import { WeatherApiManager } from '@/src/Libs/ApiManager/Service/WeatherApiManager';
 import { AppRoutes } from '@/src/Libs/Contants/Routes';
 import { SearchCountryContext } from '@/src/Libs/Context/SearchCountry';
+import { ToastContext } from '@/src/Libs/Context/Toast';
 import { classNameMerger } from '@/src/Libs/Utils/Common';
 import {
     foreCastdaysList,
@@ -20,8 +22,9 @@ import styles from './index.module.scss';
 function CitiesListing() {
     const [selectedCity, setSelectedCity] = useState<ICityList>();
     const [cityList, setCityList] = useState<ICityList[]>([]);
-    const { setSelectedCountry } = useContext(SearchCountryContext);
+    const { setSearchCountry } = useContext(SearchCountryContext);
     const router = useRouter();
+    const { setToast } = useContext(ToastContext);
     const fetchWeatherApi = async ({
         lat,
         long,
@@ -39,13 +42,17 @@ function CitiesListing() {
                 'temperature_2m_min',
                 'weather_code',
             ].join(','),
-            current: ['temperature_2m'],
+            current: ['temperature_2m', 'weather_code'],
             forecast_days: 3,
         };
         const res = await new WeatherApiManager().fetchWeatherApi(
             createPayload
         );
-        return res.data;
+        if (res?.data && res?.status) {
+            return res.data;
+        } else {
+            setToast({ label: 'Something went wrong. Please try again.' });
+        }
     };
 
     const initialiser = async () => {
@@ -55,18 +62,21 @@ function CitiesListing() {
             lats.push(item.lat);
             longs.push(item.long);
         });
+
         const res = await fetchWeatherApi({
             lat: lats,
             long: longs,
         });
-        const newList = dataJson.cityList?.map((item, index) => {
-            return {
-                ...item,
-                weatherData: res[index],
-            };
-        });
-        setSelectedCity(newList[0]);
-        setCityList(newList);
+        if (res) {
+            const newList = dataJson.cityList?.map((item, index) => {
+                return {
+                    ...item,
+                    weatherData: res[index],
+                };
+            });
+            setSelectedCity(newList[0]);
+            setCityList(newList);
+        }
     };
 
     useEffect(() => {
@@ -90,7 +100,7 @@ function CitiesListing() {
     }, [selectedCity]);
 
     const handleRedirectToWeatherPage = (item: any) => {
-        setSelectedCountry({
+        setSearchCountry({
             lat: item?.lat,
             long: item?.long,
             name: item.name,
@@ -117,7 +127,14 @@ function CitiesListing() {
                             }}
                         >
                             <div className={styles.iconTimeName}>
-                                <div className={styles.icon}></div>
+                                <div className={styles.icon}>
+                                    <WeatherImage
+                                        weatherCode={
+                                            item?.weatherData?.current
+                                                ?.weather_code
+                                        }
+                                    />
+                                </div>
                                 <div className={styles.nameTime}>
                                     <h3>{item.name}</h3>
                                     {selectedCity?.id === item?.id && (

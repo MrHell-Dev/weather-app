@@ -1,0 +1,69 @@
+@import '../../../styles/partials/variable.scss';
+
+.toastContainer {
+    position: fixed;
+    width: 37.5rem;
+    z-index: 999;
+    top: 3.5rem !important;
+    padding: 0 1rem;
+
+    > div {
+        width: 100%;
+        border-radius: 0.75rem;
+        padding: 1rem;
+        background-color: $black;
+
+        .iconBox {
+            min-width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+
+            i {
+                color: $white;
+            }
+        }
+
+        .toastBody {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            justify-content: center;
+
+            p {
+                color: $white;
+                max-width: calc(100% - 2rem);
+            }
+
+            .header {
+                position: relative;
+
+                p {
+                    font-size: 1.25rem;
+                    font-family: $font-bold;
+                }
+
+                i {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    cursor: pointer;
+                    color: $white;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: $lg) {
+    .toastContainer {
+        & > div {
+            padding: 1.5rem;
+        }
+    }
+}

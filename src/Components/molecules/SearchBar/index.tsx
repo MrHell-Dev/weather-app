@@ -12,7 +12,7 @@ function SearchBar() {
     const [searchItem, setSearchItem] = useState<string>();
     const [itemList, setItemList] = useState([]);
     const [showDropDown, setShowDropDown] = useState(false);
-    const { setSelectedCountry } = useContext(SearchCountryContext);
+    const { setSearchCountry } = useContext(SearchCountryContext);
     const router = useRouter();
     const handleSearch = async () => {
         const res = await new WeatherApiManager().fetchCityDataApi({
@@ -25,7 +25,7 @@ function SearchBar() {
     };
 
     const handleCitySelect = (item: any) => {
-        setSelectedCountry({
+        setSearchCountry({
             lat: item?.latitude,
             long: item?.longitude,
             name: item?.name,
