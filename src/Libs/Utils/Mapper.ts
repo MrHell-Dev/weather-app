@@ -43,5 +43,6 @@ export const foreCastdaysList = (itemData: any) => {
         date: item,
         temp_max: itemData?.temperature_2m_max[index],
         temp_min: itemData?.temperature_2m_min[index],
+        code: itemData?.weather_code[index],
     }));
 };

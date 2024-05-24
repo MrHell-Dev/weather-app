@@ -1,3 +1,4 @@
+import WeatherImage from '@/src/Components/atoms/WeatherImage';
 import { classNameMerger } from '@/src/Libs/Utils/Common';
 import { Col, Row } from 'react-bootstrap';
 import styles from './index.module.scss';
@@ -7,11 +8,11 @@ interface IForecastingCardListingData {
     todaysForecastingData: {
         time: string;
         temp: string;
-        code: number;
+        code: any;
     }[];
 }
 
-function ForcastCardListing(props: IForecastingCardListingData) {
+function ForcastCardListing(props: Readonly<IForecastingCardListingData>) {
     const { todaysForecastingData, className = '' } = props;
     return (
         <div className={classNameMerger(styles.cityTodayForcast, className)}>
@@ -20,7 +21,9 @@ function ForcastCardListing(props: IForecastingCardListingData) {
                 {todaysForecastingData?.map((item) => (
                     <Col className={styles.item} lg={4} key={item.time}>
                         <p>{item.time}</p>
-                        Icon
+                        <div className={styles.icon}>
+                            <WeatherImage weatherCode={item?.code} />
+                        </div>
                         <h5 className="tempatureLabel">{item?.temp}</h5>
                     </Col>
                 ))}
